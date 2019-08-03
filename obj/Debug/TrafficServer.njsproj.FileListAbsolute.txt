@@ -1,0 +1,3 @@
+D:\Projects\TrafficServer\TrafficServer\obj\Debug\TrafficServer.njsprojAssemblyReference.cache
+D:\Projects\TrafficServer\TrafficServer\obj\Debug\TrafficServer.njsproj.CoreCompileInputs.cache
+D:\Projects\TrafficServer\TrafficServer\bin\Microsoft.NodejsTools.WebRole.dll

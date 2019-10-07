@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      var url;
+      var light;
+      var timeleft;
+      function httpGet(theUrl)
+			{
+  	  	var xmlHttp = new XMLHttpRequest();
+    		xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    		xmlHttp.send( null );
+    		return xmlHttp.responseText;
+			}
+      function oc()
+      {
+        url = document.getElementById('url').value;
+        alert("Url is " + url);
+      }
+      function update()
+      {
+        light = httpGet(url+"/api/light");
+        timeleft = httpGet(url+"/api/timeleft");
+        var green = document.getElementById('greenlight');
+        var red = document.getElementById('redlight');
+        var num = document.getElementById('num');
+        var prog = document.getElementById('progress');
+        switch(light)
+        {
+          case 'red':
+            green.style.visibility = 'hidden';
+            red.style.visibility = 'visible';
+            break;
+          case 'green':
+            green.style.visibility = 'visible';
+            red.style.visibility = 'hidden';
+            break;
+          default:
+            green.style.visibility = 'hidden';
+            red.style.visibility = 'hidden';
+        }
+        num.innerHTML= ''+timeleft;
+				prog.value = timeleft;
+      }
+      setInterval(update,1000);
+    </script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>신호등 UI 테스트</h1>
+    <h1> <span style="font-family: &quot;Open Sans&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; font-size: 100px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: white; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; color: #00ff00;"
+
+        id="greenlight">●</span> <span style="font-family: &quot;Open Sans&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; font-size: 100px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: white; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; color: red;"
+
+        id="redlight">●</span> </h1>
+    <progress value="5" max="30" id="progress"></progress>
+    <p id="number">5</p>
+    <input id="url" onchange="oc()" type="url">
+  </body>
+</html>

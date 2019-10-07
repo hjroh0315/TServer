@@ -16,7 +16,9 @@ var grLight = 'red'
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-
+app.get('/', (request, response) => {
+    response.sendFile(path.join(__dirname + '/UI.html'));
+})
 
 app.get('/addpatient', (request, response) => {
     response.sendFile(path.join(__dirname + '/index.html'));
@@ -24,6 +26,17 @@ app.get('/addpatient', (request, response) => {
 
 app.get('/api/light', (request, response) => {
     response.send(grLight);
+})
+
+app.get('/api/std', (_request, response) => {
+    response.send(`${grLightStd}`);
+})
+
+app.get('/api/timeleft', (request, response) => {
+    if (grLightStd > currTime)
+        response.send(''+(grLightStd - currTime));
+    else
+        response.send(''+(interval - currTime));
 })
 
 app.post("/api/patient", (request, response) => {
